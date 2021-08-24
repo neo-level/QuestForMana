@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour {
@@ -21,15 +19,11 @@ public class DialogManager : MonoBehaviour {
     private bool markQuestComplete;
     private bool shouldMarkQuest;
 
-    // Use this for initialization
-    void Start () {
+    private void Start () {
         instance = this;
-
-        //dialogText.text = dialogLines[currentLine];
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		
         if(dialogBox.activeInHierarchy)
         {
@@ -38,13 +32,10 @@ public class DialogManager : MonoBehaviour {
                 if (!justStarted)
                 {
                     currentLine++;
-
                     if (currentLine >= dialogLines.Length)
                     {
                         dialogBox.SetActive(false);
-
                         GameManager.instance.dialogActive = false;
-
                         if(shouldMarkQuest)
                         {
                             shouldMarkQuest = false;
@@ -60,20 +51,21 @@ public class DialogManager : MonoBehaviour {
                     else
                     {
                         CheckIfName();
-
                         dialogText.text = dialogLines[currentLine];
                     }
                 } else
                 {
                     justStarted = false;
                 }
-
-                
             }
         }
-
 	}
 
+    /// <summary>
+    /// Spawns the dialog text when interacting with NPCs
+    /// </summary>
+    /// <param name="newLines">string[]</param>
+    /// <param name="isPerson">bool</param>
     public void ShowDialog(string[] newLines, bool isPerson)
     {
         dialogLines = newLines;
@@ -92,6 +84,9 @@ public class DialogManager : MonoBehaviour {
         GameManager.instance.dialogActive = true;
     }
 
+    /// <summary>
+    /// Checks if the dialog starts with a specific char, replaces if necessary
+    /// </summary>
     public void CheckIfName()
     {
         if(dialogLines[currentLine].StartsWith("n-"))
@@ -101,6 +96,11 @@ public class DialogManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Completes the current quest.
+    /// </summary>
+    /// <param name="questName">string</param>
+    /// <param name="markComplete">bool</param>
     public void ShouldActivateQuestAtEnd(string questName, bool markComplete)
     {
         questToMark = questName;

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UIFade : MonoBehaviour {
@@ -13,16 +11,12 @@ public class UIFade : MonoBehaviour {
     public bool shouldFadeToBlack;
     public bool shouldFadeFromBlack;
 
-	// Use this for initialization
-	void Start () {
+	private void Start () {
         instance = this;
-
         DontDestroyOnLoad(gameObject);
-
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 
         if (shouldFadeToBlack)
         {
@@ -45,6 +39,9 @@ public class UIFade : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Fades screen to black when leaving area.
+    /// </summary>
     public void FadeToBlack()
     {
         shouldFadeToBlack = true;
@@ -52,6 +49,9 @@ public class UIFade : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// Removes screen fade when entering area.
+    /// </summary>
     public void FadeFromBlack()
     {
         shouldFadeToBlack = false;

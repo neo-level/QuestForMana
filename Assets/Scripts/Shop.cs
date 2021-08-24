@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Shop : MonoBehaviour {
@@ -22,19 +20,20 @@ public class Shop : MonoBehaviour {
     public Text buyItemName, buyItemDescription, buyItemValue;
     public Text sellItemName, sellItemDescription, sellItemValue;
 
-	// Use this for initialization
-	void Start () {
+	private void Start () {
         instance = this;
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		if(Input.GetKeyDown(KeyCode.K) && !shopMenu.activeInHierarchy)
         {
             OpenShop();
         }
 	}
 
+    /// <summary>
+    /// Opens the shop UI.
+    /// </summary>
     public void OpenShop()
     {
         shopMenu.SetActive(true);
@@ -45,12 +44,18 @@ public class Shop : MonoBehaviour {
         goldText.text = GameManager.instance.currentGold.ToString() + "g";
     }
 
+    /// <summary>
+    /// Closes the shop UI.
+    /// </summary>
     public void CloseShop()
     {
         shopMenu.SetActive(false);
         GameManager.instance.shopActive = false;
     }
 
+    /// <summary>
+    /// Opens UI to buy items.
+    /// </summary>
     public void OpenBuyMenu()
     {
         buyItemButtons[0].Press();
@@ -76,6 +81,9 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Opens UI to sell your items.
+    /// </summary>
     public void OpenSellMenu()
     {
         sellItemButtons[0].Press();
@@ -87,6 +95,9 @@ public class Shop : MonoBehaviour {
         
     }
 
+    /// <summary>
+    /// Shows the items you can sell.
+    /// </summary>
     private void ShowSellItems()
     {
         GameManager.instance.SortItems();
@@ -108,6 +119,10 @@ public class Shop : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Allows selection of items to buy
+    /// </summary>
+    /// <param name="buyItem">Item</param>
     public void SelectBuyItem(Item buyItem)
     {
         selectedItem = buyItem;
@@ -116,6 +131,10 @@ public class Shop : MonoBehaviour {
         buyItemValue.text = "Value: " + selectedItem.value + "g";
     }
 
+    /// <summary>
+    /// Allows selection of items to sell.
+    /// </summary>
+    /// <param name="sellItem"></param>
     public void SelectSellItem(Item sellItem)
     {
         selectedItem = sellItem;
@@ -124,6 +143,9 @@ public class Shop : MonoBehaviour {
         sellItemValue.text = "Value: " + Mathf.FloorToInt(selectedItem.value * .5f).ToString() + "g";
     }
 
+    /// <summary>
+    /// Buys selected item.
+    /// </summary>
     public void BuyItem()
     {
         if (selectedItem != null)
@@ -139,6 +161,9 @@ public class Shop : MonoBehaviour {
         goldText.text = GameManager.instance.currentGold.ToString() + "g";
     }
 
+    /// <summary>
+    /// Sells item.
+    /// </summary>
     public void SellItem()
     {
         if(selectedItem != null)

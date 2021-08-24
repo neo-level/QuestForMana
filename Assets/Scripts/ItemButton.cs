@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemButton : MonoBehaviour {
@@ -9,16 +7,9 @@ public class ItemButton : MonoBehaviour {
     public Text amountText;
     public int buttonValue;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+    /// <summary>
+    /// When the item is selected, show selection and item details.
+    /// </summary>
     public void Press()
     {
         if (GameMenu.instance.theMenu.activeInHierarchy)

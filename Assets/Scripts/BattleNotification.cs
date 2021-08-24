@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class BattleNotification : MonoBehaviour {
@@ -9,13 +7,7 @@ public class BattleNotification : MonoBehaviour {
     private float awakeCounter;
     public Text theText;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		if(awakeCounter > 0)
         {
             awakeCounter -= Time.deltaTime;

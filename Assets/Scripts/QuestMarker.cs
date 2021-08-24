@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class QuestMarker : MonoBehaviour {
 
@@ -12,13 +10,7 @@ public class QuestMarker : MonoBehaviour {
 
     public bool deactivateOnMarking;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		if(canMark && Input.GetButtonDown("Fire1"))
         {
             canMark = false;
@@ -26,6 +18,9 @@ public class QuestMarker : MonoBehaviour {
         }
 	}
 
+    /// <summary>
+    /// Marks the quest, complete or incomplete.
+    /// </summary>
     public void MarkQuest()
     {
         if(markComplete)
@@ -39,10 +34,14 @@ public class QuestMarker : MonoBehaviour {
         gameObject.SetActive(!deactivateOnMarking);
     }
 
+    /// <summary>
+    /// When hit marks the quest.
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             if (markOnEnter)
             {
@@ -55,9 +54,13 @@ public class QuestMarker : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// When leaves mark questing is false.
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             canMark = false;
         }

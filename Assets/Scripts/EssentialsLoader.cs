@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EssentialsLoader : MonoBehaviour {
 
@@ -10,8 +8,7 @@ public class EssentialsLoader : MonoBehaviour {
     public GameObject audioMan;
     public GameObject battleMan;
 
-	// Use this for initialization
-	void Start () {
+	private void Start () {
 		if(UIFade.instance == null)
         {
             UIFade.instance = Instantiate(UIScreen).GetComponent<UIFade>();
@@ -37,10 +34,5 @@ public class EssentialsLoader : MonoBehaviour {
         {
             BattleManager.instance = Instantiate(battleMan).GetComponent<BattleManager>();
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }

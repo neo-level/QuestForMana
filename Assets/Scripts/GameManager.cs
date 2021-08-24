@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
@@ -17,17 +15,13 @@ public class GameManager : MonoBehaviour {
 
     public int currentGold;
 
-	// Use this for initialization
-	void Start () {
+	private void Start () {
         instance = this;
-
         DontDestroyOnLoad(gameObject);
-
         SortItems();
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		if(gameMenuOpen || dialogActive || fadingBetweenAreas || shopActive || battleActive)
         {
             PlayerController.instance.canMove = false;
@@ -40,7 +34,6 @@ public class GameManager : MonoBehaviour {
         {
             AddItem("Iron Armor");
             AddItem("Blabla");
-
             RemoveItem("Health Potion");
             RemoveItem("Bleep");
         }
@@ -56,9 +49,13 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Shows details from selected item
+    /// </summary>
+    /// <param name="itemToGrab">string</param>
+    /// <returns>null</returns>
     public Item GetItemDetails(string itemToGrab)
     {
-
         for(int i = 0; i < referenceItems.Length; i++)
         {
             if(referenceItems[i].itemName == itemToGrab)
@@ -66,13 +63,12 @@ public class GameManager : MonoBehaviour {
                 return referenceItems[i];
             }
         }
-
-
-
-
         return null;
     }
 
+    /// <summary>
+    /// Sorts items in inventory bag.
+    /// </summary>
     public void SortItems()
     {
         bool itemAFterSpace = true;
@@ -99,6 +95,10 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Adds item to inventory bag.
+    /// </summary>
+    /// <param name="itemToAdd">string</param>
     public void AddItem(string itemToAdd)
     {
         int newItemPosition = 0;
@@ -140,6 +140,10 @@ public class GameManager : MonoBehaviour {
         GameMenu.instance.ShowItems();
     }
 
+    /// <summary>
+    /// Removes item from inventory bag.
+    /// </summary>
+    /// <param name="itemToRemove">string</param>
     public void RemoveItem(string itemToRemove)
     {
         bool foundItem = false;
@@ -172,6 +176,9 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Saves the game.
+    /// </summary>
     public void SaveData()
     {
         PlayerPrefs.SetString("Current_Scene", SceneManager.GetActiveScene().name);
@@ -212,6 +219,9 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Loads the game.
+    /// </summary>
     public void LoadData()
     {
         PlayerController.instance.transform.position = new Vector3(PlayerPrefs.GetFloat("Player_Position_x"), PlayerPrefs.GetFloat("Player_Position_y"), PlayerPrefs.GetFloat("Player_Position_z"));

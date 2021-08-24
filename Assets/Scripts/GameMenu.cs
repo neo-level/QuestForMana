@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -34,20 +32,15 @@ public class GameMenu : MonoBehaviour {
 
     public string mainMenuName;
 
-    // Use this for initialization
-    void Start () {
+    private void Start () {
         instance = this;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+    
+	private void Update () {
 		if(Input.GetButtonDown("Fire2"))
         {
             if(theMenu.activeInHierarchy)
             {
-                //theMenu.SetActive(false);
-                //GameManager.instance.gameMenuOpen = false;
-
                 CloseMenu();
             } else
             {
@@ -55,11 +48,13 @@ public class GameMenu : MonoBehaviour {
                 UpdateMainStats();
                 GameManager.instance.gameMenuOpen = true;
             }
-
             AudioManager.instance.PlaySFX(5);
         }
 	}
 
+    /// <summary>
+    /// Updates character stats.
+    /// </summary>
     public void UpdateMainStats()
     {
         playerStats = GameManager.instance.playerStats;
@@ -87,6 +82,10 @@ public class GameMenu : MonoBehaviour {
         goldText.text = GameManager.instance.currentGold.ToString() + "g";
     }
 
+    /// <summary>
+    /// Toggles windows on or off.
+    /// </summary>
+    /// <param name="windowNumber"></param>
     public void ToggleWindow(int windowNumber)
     {
         UpdateMainStats();
@@ -105,6 +104,9 @@ public class GameMenu : MonoBehaviour {
         itemCharChoiceMenu.SetActive(false);
     }
 
+    /// <summary>
+    /// Closes the menu.
+    /// </summary>
     public void CloseMenu()
     {
         for(int i = 0; i < windows.Length; i++)
@@ -119,6 +121,9 @@ public class GameMenu : MonoBehaviour {
         itemCharChoiceMenu.SetActive(false);
     }
 
+    /// <summary>
+    /// Opens the status screen.
+    /// </summary>
     public void OpenStatus()
     {
         UpdateMainStats();
@@ -133,6 +138,10 @@ public class GameMenu : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Loads status from character.
+    /// </summary>
+    /// <param name="selected">int</param>
     public void StatusChar(int selected)
     {
         statusName.text = playerStats[selected].charName;
@@ -155,6 +164,9 @@ public class GameMenu : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// Shows all items.
+    /// </summary>
     public void ShowItems()
     {
         GameManager.instance.SortItems();
@@ -176,6 +188,10 @@ public class GameMenu : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Allows selection of item
+    /// </summary>
+    /// <param name="newItem">Item</param>
     public void SelectItem(Item newItem)
     {
         activeItem = newItem;
@@ -194,6 +210,9 @@ public class GameMenu : MonoBehaviour {
         itemDescription.text = activeItem.description;
     }
 
+    /// <summary>
+    /// Allows the removal of an item.
+    /// </summary>
     public void DiscardItem()
     {
         if(activeItem != null)
@@ -202,6 +221,9 @@ public class GameMenu : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Activates/opens the selected item.
+    /// </summary>
     public void OpenItemCharChoice()
     {
         itemCharChoiceMenu.SetActive(true);
@@ -213,28 +235,44 @@ public class GameMenu : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Closes the selected item.
+    /// </summary>
     public void CloseItemCharChoice()
     {
         itemCharChoiceMenu.SetActive(false);
     }
 
+    /// <summary>
+    /// Allows the usages of the selected item.
+    /// </summary>
+    /// <param name="selectChar">int</param>
     public void UseItem(int selectChar)
     {
         activeItem.Use(selectChar);
         CloseItemCharChoice();
     }
 
+    /// <summary>
+    /// Saves game when the button is clicked..
+    /// </summary>
     public void SaveGame()
     {
         GameManager.instance.SaveData();
         QuestManager.instance.SaveQuestData();
     }
 
+    /// <summary>
+    /// Plays sound when pressing buttons on the menu.
+    /// </summary>
     public void PlayButtonSound()
     {
         AudioManager.instance.PlaySFX(4);
     }
 
+    /// <summary>
+    /// Quits game when the button is clicked.
+    /// </summary>
     public void QuitGame()
     {
         SceneManager.LoadScene(mainMenuName);

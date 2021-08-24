@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShopKeeper : MonoBehaviour {
 
@@ -8,13 +6,7 @@ public class ShopKeeper : MonoBehaviour {
 
     public string[] ItemsForSale = new string[40];
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		if(canOpen && Input.GetButtonDown("Fire1") && PlayerController.instance.canMove && !Shop.instance.shopMenu.activeInHierarchy)
         {
             Shop.instance.itemsForSale = ItemsForSale;
@@ -23,17 +15,25 @@ public class ShopKeeper : MonoBehaviour {
         }
 	}
 
+    /// <summary>
+    /// Allows to open Shop UI if next to shopkeeper
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player")
+        if(other.CompareTag("Player"))
         {
             canOpen = true;
         }
     }
 
+    /// <summary>
+    /// Prevents to open Shop UI if next to shopkeeper
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             canOpen = false;
         }

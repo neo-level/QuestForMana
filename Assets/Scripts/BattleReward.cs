@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class BattleReward : MonoBehaviour {
@@ -16,13 +14,11 @@ public class BattleReward : MonoBehaviour {
     public bool markQuestComplete;
     public string questToMark;
 
-	// Use this for initialization
-	void Start () {
+	private void Start () {
         instance = this;
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		if(Input.GetKeyDown(KeyCode.Y))
         {
             OpenRewardScreen(54, new string[] { "Iron sword", "Iron Armor" });

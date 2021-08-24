@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BattleStarter : MonoBehaviour {
@@ -19,13 +18,11 @@ public class BattleStarter : MonoBehaviour {
     public bool shouldCompleteQuest;
     public string QuestToComplete;
 
-	// Use this for initialization
-	void Start () {
+	private void Start () {
         betweenBattleCounter = Random.Range(timeBetweenBattles * .5f, timeBetweenBattles * 1.5f);
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		if(inArea && PlayerController.instance.canMove)
         {
             if(Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
@@ -44,7 +41,7 @@ public class BattleStarter : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player")
+        if(other.CompareTag("Player"))
         {
             if (activateOnEnter)
             {
@@ -59,7 +56,7 @@ public class BattleStarter : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             if (activateOnExit)
             {

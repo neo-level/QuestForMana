@@ -50,14 +50,12 @@ public class BattleManager : MonoBehaviour {
 
     public bool cannotFlee;
 
-	// Use this for initialization
-	void Start () {
+	private void Start () {
         instance = this;
         DontDestroyOnLoad(gameObject);
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		if(Input.GetKeyDown(KeyCode.T))
         {
             BattleStart(new string[] { "Eyeball"}, false);
@@ -96,7 +94,9 @@ public class BattleManager : MonoBehaviour {
 
             GameManager.instance.battleActive = true;
 
-            transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, transform.position.z);
+            if (!(Camera.main is null))
+                transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y,
+                    transform.position.z);
             battleScene.SetActive(true);
 
             AudioManager.instance.PlayBGM(0);

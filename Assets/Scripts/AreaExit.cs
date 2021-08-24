@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class AreaExit : MonoBehaviour {
@@ -14,14 +12,12 @@ public class AreaExit : MonoBehaviour {
     public float waitToLoad = 1f;
     private bool shouldLoadAfterFade;
 
-	// Use this for initialization
-	void Start () {
+	private void Start () {
         theEntrance.transitionName = areaTransitionName;
 
     }
 	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		if(shouldLoadAfterFade)
         {
             waitToLoad -= Time.deltaTime;
@@ -35,9 +31,8 @@ public class AreaExit : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player")
+        if(other.CompareTag("Player"))
         {
-            //SceneManager.LoadScene(areaToLoad);
             shouldLoadAfterFade = true;
             GameManager.instance.fadingBetweenAreas = true;
 

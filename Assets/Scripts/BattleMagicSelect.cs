@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class BattleMagicSelect : MonoBehaviour {
@@ -9,16 +7,6 @@ public class BattleMagicSelect : MonoBehaviour {
     public int spellCost;
     public Text nameText;
     public Text costText;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void Press()
     {

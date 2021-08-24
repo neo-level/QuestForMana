@@ -1,19 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AttackEffect : MonoBehaviour {
 
     public float effectLength;
     public int soundEffect;
 
-	// Use this for initialization
-	void Start () {
+	private void Start () {
         AudioManager.instance.PlaySFX(soundEffect);
 	}
-	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
         Destroy(gameObject, effectLength);
 	}
 }

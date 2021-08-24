@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class QuestObjectActivator : MonoBehaviour {
 
@@ -12,13 +10,7 @@ public class QuestObjectActivator : MonoBehaviour {
 
     private bool initialCheckDone;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		if(!initialCheckDone)
         {
             initialCheckDone = true;
@@ -27,6 +19,9 @@ public class QuestObjectActivator : MonoBehaviour {
         }
 	}
 
+    /// <summary>
+    /// Checks quest status.
+    /// </summary>
     public void CheckCompletion()
     {
         if(QuestManager.instance.CheckIfComplete(questToCheck))

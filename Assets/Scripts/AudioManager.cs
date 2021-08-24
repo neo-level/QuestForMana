@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
 
@@ -9,15 +7,10 @@ public class AudioManager : MonoBehaviour {
 
     public static AudioManager instance;
 
-    // Use this for initialization
-    void Start () {
+    private void Start () {
         instance = this;
 
         DontDestroyOnLoad(this.gameObject);
-	}
-	
-	// Update is called once per frame
-	void Update () {
 	}
 
     public void PlaySFX(int soundToPlay)

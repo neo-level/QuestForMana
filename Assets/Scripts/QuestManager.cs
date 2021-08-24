@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class QuestManager : MonoBehaviour {
 
@@ -9,15 +7,13 @@ public class QuestManager : MonoBehaviour {
 
     public static QuestManager instance;
 
-	// Use this for initialization
-	void Start () {
+	private void Start () {
         instance = this;
 
         questMarkersComplete = new bool[questMarkerNames.Length];
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		if(Input.GetKeyDown(KeyCode.Q))
         {
             Debug.Log(CheckIfComplete("quest test"));
@@ -36,6 +32,11 @@ public class QuestManager : MonoBehaviour {
         }
 	}
 
+    /// <summary>
+    /// Gets the quest number.
+    /// </summary>
+    /// <param name="questToFind">string</param>
+    /// <returns></returns>
     public int GetQuestNumber(string questToFind)
     {
         for(int i = 0; i < questMarkerNames.Length; i++)
@@ -45,11 +46,14 @@ public class QuestManager : MonoBehaviour {
                 return i;
             }
         }
-
-        Debug.LogError("Quest " + questToFind + " does not exist");
         return 0;
     }
 
+    /// <summary>
+    /// Checks if quest is complete
+    /// </summary>
+    /// <param name="questToCheck"></param>
+    /// <returns></returns>
     public bool CheckIfComplete(string questToCheck)
     {
         if(GetQuestNumber(questToCheck) != 0)
@@ -60,6 +64,10 @@ public class QuestManager : MonoBehaviour {
         return false;
     }
 
+    /// <summary>
+    /// Marks quest as complete.
+    /// </summary>
+    /// <param name="questToMark">string</param>
     public void MarkQuestComplete(string questToMark)
     {
         questMarkersComplete[GetQuestNumber(questToMark)] = true;
@@ -67,6 +75,10 @@ public class QuestManager : MonoBehaviour {
         UpdateLocalQuestObjects();
     }
 
+        /// <summary>
+        /// Marks quest as incomplete.
+        /// </summary>
+        /// <param name="questToMark">string</param>
     public void MarkQuestIncomplete(string questToMark)
     {
         questMarkersComplete[GetQuestNumber(questToMark)] = false;
@@ -74,6 +86,9 @@ public class QuestManager : MonoBehaviour {
         UpdateLocalQuestObjects();
     }
 
+    /// <summary>
+    /// Updates the current quest objectives
+    /// </summary>
     public void UpdateLocalQuestObjects()
     {
         QuestObjectActivator[] questObjects = FindObjectsOfType<QuestObjectActivator>();
@@ -87,6 +102,9 @@ public class QuestManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Save current quest state.
+    /// </summary>
     public void SaveQuestData()
     {
         for(int i = 0; i < questMarkerNames.Length; i++)
@@ -101,6 +119,9 @@ public class QuestManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Load previous quest.
+    /// </summary>
     public void LoadQuestData()
     {
         for(int i = 0; i < questMarkerNames.Length; i++)

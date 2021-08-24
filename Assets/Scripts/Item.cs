@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Item : MonoBehaviour {
     [Header("Item Type")]
@@ -23,17 +21,11 @@ public class Item : MonoBehaviour {
 
     public int armorStrength;
 
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+    /// <summary>
+    /// Handles Item usage, depending on the choice affects
+    /// certain stats
+    /// </summary>
+    /// <param name="charToUseOn">int</param>
     public void Use(int charToUseOn)
     {
         CharStats selectedChar = GameManager.instance.playerStats[charToUseOn];

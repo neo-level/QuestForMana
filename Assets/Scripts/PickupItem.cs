@@ -1,18 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PickupItem : MonoBehaviour {
 
     private bool canPickup;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		if(canPickup && Input.GetButtonDown("Fire1") && PlayerController.instance.canMove)
         {
             GameManager.instance.AddItem(GetComponent<Item>().itemName);
@@ -20,17 +12,25 @@ public class PickupItem : MonoBehaviour {
         }
 	}
 
+    /// <summary>
+    /// Picks item up on interact.
+    /// </summary>
+    /// <param name="other">Collider2D</param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player")
+        if(other.CompareTag("Player"))
         {
             canPickup = true;
         }
     }
 
+    /// <summary>
+    /// Sets picking up items to false.
+    /// </summary>
+    /// <param name="other">Collider2D</param>
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             canPickup = false;
         }

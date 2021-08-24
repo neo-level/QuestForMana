@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
@@ -17,8 +15,7 @@ public class PlayerController : MonoBehaviour {
 
     public bool canMove = true;
 
-	// Use this for initialization
-	void Start () {
+	private void Start () {
         if (instance == null)
         {
             instance = this;
@@ -29,12 +26,10 @@ public class PlayerController : MonoBehaviour {
                 Destroy(gameObject);
             }
         }
-
         DontDestroyOnLoad(gameObject);
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	private void Update () {
         if (canMove)
         {
             theRB.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * moveSpeed;
@@ -60,6 +55,11 @@ public class PlayerController : MonoBehaviour {
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, bottomLeftLimit.x, topRightLimit.x), Mathf.Clamp(transform.position.y, bottomLeftLimit.y, topRightLimit.y), transform.position.z);
     }
 
+    /// <summary>
+    /// Sets boundary elements for the screen.
+    /// </summary>
+    /// <param name="botLeft">Vector3</param>
+    /// <param name="topRight">Vector3</param>
     public void SetBounds(Vector3 botLeft, Vector3 topRight)
     {
         bottomLeftLimit = botLeft + new Vector3(.5f, 1f, 0f);

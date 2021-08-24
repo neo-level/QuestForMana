@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
@@ -11,8 +9,7 @@ public class MainMenu : MonoBehaviour {
 
     public string loadGameScene;
 
-	// Use this for initialization
-	void Start () {
+	private void Start () {
 		if(PlayerPrefs.HasKey("Current_Scene"))
         {
             continueButton.SetActive(true);
@@ -22,21 +19,25 @@ public class MainMenu : MonoBehaviour {
         }
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+    /// <summary>
+    /// Continues last saved game.
+    /// </summary>
     public void Continue()
     {
         SceneManager.LoadScene(loadGameScene);
     }
 
+    /// <summary>
+    /// Starts new game.
+    /// </summary>
     public void NewGame()
     {
         SceneManager.LoadScene(newGameScene);
     }
 
+    /// <summary>
+    /// Exits game.
+    /// </summary>
     public void Exit()
     {
         Application.Quit();
